@@ -8,12 +8,13 @@ type Props = {
     imageURL: string;
 };
 const BlogCard = ({title, description, userId, imageURL}: Props) => {
+    const url = process.env.BACKEND_API_URL;
     const [userDetails, setUserDetails] = useState<any>();
 
     const [profileName, setProfileName] = useState('');
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/users/${userId}`).then((res) => {
+        axios.get(`https://inkdrop-sankhajah.onrender.com/users/${userId}`).then((res) => {
             setUserDetails(res.data);
             getProfileName(res.data.name);
         });

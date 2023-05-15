@@ -6,6 +6,7 @@ import {useEffect, useState} from 'react';
 
 type Props = {};
 const Blog = (props: Props) => {
+    const url = process.env.BACKEND_API_URL;
     const router = useRouter();
     const {id} = router.query;
     const [blogDetails, setBlogDetails] = useState<any>();
@@ -16,7 +17,7 @@ const Blog = (props: Props) => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5001/blogs/${id}`)
+            .get(`https://inkdrop-sankhajah.onrender.com/blogs/${id}`)
             .then((res) => {
                 setBlogDetails(res.data);
                 getProfileName(res.data.name);

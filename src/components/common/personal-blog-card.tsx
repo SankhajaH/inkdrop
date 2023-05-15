@@ -11,10 +11,11 @@ type Props = {
     onDelete: (blogId: string) => void;
 };
 const PersonalBlogCard = ({title, description, blogId, onDelete, imageURL}: Props) => {
+    const url = process.env.BACKEND_API_URL;
     const session = useSession();
     const name = session?.data?.user?.name;
     const handleDelete = async () => {
-        await axios.delete(`http://localhost:5001/blogs/${blogId}`).then((res) => {
+        await axios.delete(`https://inkdrop-sankhajah.onrender.com/blogs/${blogId}`).then((res) => {
             onDelete(blogId);
         });
     };

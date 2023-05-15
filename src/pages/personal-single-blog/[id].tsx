@@ -10,10 +10,11 @@ const PersonalSingleBlog = (props: Props) => {
     const session = useSession();
     const router = useRouter();
     const blogId = router.query.id;
+    const url = process.env.BACKEND_API_URL;
 
     const [preloadedValues, setPreloadedValues] = useState({});
     useEffect(() => {
-        axios.get(`http://localhost:5001/blogs/${blogId}`).then((res) => {
+        axios.get(`https://inkdrop-sankhajah.onrender.com/blogs/${blogId}`).then((res) => {
             setPreloadedValues({title: res.data.title, story: res.data.story});
         });
     }, []);
@@ -32,9 +33,11 @@ const PersonalSingleBlog = (props: Props) => {
 
     const onSubmit = async (data: any) => {
         const blogDetails = {title: data.title, story: data.story};
-        await axios.patch(`http://localhost:5001/blogs/${blogId}`, blogDetails).then((res) => {
-            alert('Blog updated successfully');
-        });
+        await axios
+            .patch(`https://inkdrop-sankhajah.onrender.com/blogs/${blogId}`, blogDetails)
+            .then((res) => {
+                alert('Blog updated successfully');
+            });
         reset();
         router.replace(`/personal-blogs/645f2fccff84e16fcef67c33`);
     };

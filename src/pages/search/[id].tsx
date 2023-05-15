@@ -6,6 +6,7 @@ import {useEffect, useState} from 'react';
 
 type Props = {};
 const SearchPage = (props: Props) => {
+    const url = process.env.BACKEND_API_URL;
     const router = useRouter();
     const {id} = router.query;
     const [blogs, setBlogs] = useState<any>();
@@ -15,7 +16,7 @@ const SearchPage = (props: Props) => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:5001/blogs/search/${id}`)
+            .get(`https://inkdrop-sankhajah.onrender.com/blogs/search/${id}`)
             .then((res) => {
                 console.log('🚀 ~ file: index.tsx:17 ~ .then ~ res:', res.data);
                 setBlogs(res.data);

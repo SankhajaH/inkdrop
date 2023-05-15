@@ -7,19 +7,20 @@ import {useEffect, useState} from 'react';
 
 type Props = {};
 const MyBlogs = (props: Props) => {
+    const url = process.env.BACKEND_API_URL;
     const session = useSession();
     const router = useRouter();
     const userId = router.query.id;
     const [blogDetails, setBlogDetails] = useState<any>();
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/blogs/user/${userId}`).then((res) => {
+        axios.get(`https://inkdrop-sankhajah.onrender.com/blogs/user/${userId}`).then((res) => {
             setBlogDetails(res.data);
         });
     }, []);
 
     const handleDelete = async (blogId: string) => {
-        await axios.delete(`http://localhost:5001/blogs/${blogId}`).then((res) => {
+        await axios.delete(`https://inkdrop-sankhajah.onrender.com/blogs/${blogId}`).then((res) => {
             alert('Deleted successfully!');
             setBlogDetails(blogDetails.filter((blog: any) => blog._id !== blogId));
         });

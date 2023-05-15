@@ -9,6 +9,7 @@ import {useForm} from 'react-hook-form';
 import {v4 as uuidv4} from 'uuid';
 type Props = {};
 const CreateBlog = (props: Props) => {
+    const url = process.env.BACKEND_API_URL;
     const session = useSession();
     console.log('🚀 ~ file: create-blog.tsx:13 ~ CreateBlog ~ session:', session);
     const userId = session?.data?.user?.id;
@@ -36,9 +37,11 @@ const CreateBlog = (props: Props) => {
                 name: session?.data?.user?.name,
                 imageURL: downloadURL,
             };
-            await axios.post('http://localhost:5001/blogs', blogDetails).then((res) => {
-                alert('Blog created successfully');
-            });
+            await axios
+                .post(`https://inkdrop-sankhajah.onrender.com/blogs`, blogDetails)
+                .then((res) => {
+                    alert('Blog created successfully');
+                });
         } else {
             const blogDetails = {
                 title: data.title,
@@ -46,9 +49,11 @@ const CreateBlog = (props: Props) => {
                 name: session?.data?.user?.name,
                 userId: userId,
             };
-            await axios.post('http://localhost:5001/blogs', blogDetails).then((res) => {
-                alert('Blog created successfully');
-            });
+            await axios
+                .post(`https://inkdrop-sankhajah.onrender.com/blogs`, blogDetails)
+                .then((res) => {
+                    alert('Blog created successfully');
+                });
         }
         reset();
         router.push(`/personal-blogs/${userId}`);

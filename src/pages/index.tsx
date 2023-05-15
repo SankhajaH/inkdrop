@@ -11,6 +11,8 @@ import {useForm} from 'react-hook-form';
 const inter = Inter({subsets: ['latin']});
 
 export default function Home() {
+    const url = process.env.BACKEND_API_URL;
+    console.log('🚀 ~ file: index.tsx:15 ~ Home ~ url:', url);
     const session = useSession();
     const [blogs, setBlogs] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
@@ -31,7 +33,7 @@ export default function Home() {
     useEffect(() => {
         setLoading(true);
         axios
-            .get('http://localhost:5001/blogs')
+            .get(`https://inkdrop-sankhajah.onrender.com/blogs`)
             .then((res) => {
                 console.log('🚀 ~ file: index.tsx:17 ~ .then ~ res:', res.data);
                 setBlogs(res.data);
