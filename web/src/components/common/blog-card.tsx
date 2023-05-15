@@ -33,10 +33,10 @@ const BlogCard = ({title, description, userId, imageURL}: Props) => {
     return (
         <div>
             {userDetails && (
-                <div className='card w-80 md:w-96 bg-base-100 shadow-xl image-full h-48'>
+                <div className='card w-full bg-base-100 shadow-xl image-full h-48'>
                     {imageURL ? (
                         <figure>
-                            <img src={imageURL} alt='cover_image' width={380} height={200} />
+                            <img src={imageURL} alt='cover_image' className='object-cover w-full' />
                         </figure>
                     ) : (
                         <div className='card w-80 md:w-96 bg-base-100 shadow-xl'></div>

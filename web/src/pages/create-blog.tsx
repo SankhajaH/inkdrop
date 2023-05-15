@@ -39,17 +39,17 @@ const CreateBlog = (props: Props) => {
             await axios.post('http://localhost:5001/blogs', blogDetails).then((res) => {
                 alert('Blog created successfully');
             });
+        } else {
+            const blogDetails = {
+                title: data.title,
+                story: data.story,
+                name: session?.data?.user?.name,
+                userId: userId,
+            };
+            await axios.post('http://localhost:5001/blogs', blogDetails).then((res) => {
+                alert('Blog created successfully');
+            });
         }
-        const blogDetails = {
-            title: data.title,
-            story: data.story,
-            name: session?.data?.user?.name,
-            userId: userId,
-        };
-        await axios.post('http://localhost:5001/blogs', blogDetails).then((res) => {
-            alert('Blog created successfully');
-        });
-
         reset();
         router.push(`/personal-blogs/${userId}`);
     };

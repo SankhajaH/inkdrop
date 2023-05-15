@@ -23,10 +23,26 @@ app.listen(5001, () => {
 
 //routes
 app.get('/blogs', (req, res) => {
-    const query = {};
-    if (req.query.title) {
-        query.title = {$regex: new RegExp(req.query.title, 'i')};
-    }
+    db.collection('blogs')
+        .find()
+        .toArray()
+        .then((blogs) => {
+            res.status(200).json(blogs);
+        })
+        .catch(() => {
+            res.status(500).json({message: 'Could not fetch blogs'});
+        });
+});
+
+app.get('/blogs/search/:searchTerm', (req, res) => {
+    const searchTerm = req.params.searchTerm;
+    const query = {
+        $or: [
+            {title: {$regex: searchTerm, $options: 'i'}},
+            {name: {$regex: searchTerm, $options: 'i'}},
+        ],
+    };
+
     db.collection('blogs')
         .find(query)
         .toArray()

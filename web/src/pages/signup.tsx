@@ -19,6 +19,7 @@ const Signup = (props: Props) => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: {errors},
     } = useForm<IFormInput>();
     const [authType, setAuthType] = useState('Login');
@@ -46,8 +47,7 @@ const Signup = (props: Props) => {
             password: args.password,
             redirect: false,
         });
-
-        res.error ? console.log(res.error) : router.push('/create-blog');
+        res.error ? alert(res.error) : router.push('/create-blog');
     };
 
     const onSubmit = handleSubmit(async (data) => {
@@ -56,6 +56,7 @@ const Signup = (props: Props) => {
         } else {
             await loginUser(data);
         }
+        reset();
     });
 
     return (
@@ -70,7 +71,7 @@ const Signup = (props: Props) => {
                             <p>
                                 {authType === 'Login'
                                     ? 'Not registered yet? '
-                                    : 'Already have an account? '}
+                                    : 'Already registered? '}
                             </p>
                             <button
                                 type='button'

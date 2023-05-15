@@ -15,7 +15,7 @@ const SearchPage = (props: Props) => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:5001/blogs?name=${id}`)
+            .get(`http://localhost:5001/blogs/search/${id}`)
             .then((res) => {
                 console.log('🚀 ~ file: index.tsx:17 ~ .then ~ res:', res.data);
                 setBlogs(res.data);
@@ -28,8 +28,8 @@ const SearchPage = (props: Props) => {
     if (loading)
         return (
             <Container className='flex-1'>
-                <div className='text-5xl  items-center'>
-                    <button className='btn loading'>Loading</button>
+                <div className='text-5xl items-center'>
+                    <button className='btn loading disabled:'>Loading</button>
                 </div>
             </Container>
         );
@@ -37,7 +37,7 @@ const SearchPage = (props: Props) => {
         <Container page>
             <div className='mt-6'>
                 {blogs && blogs.length > 0 ? (
-                    <div className='grid grid-cols-3 gap-6'>
+                    <div className='grid grid-cols-1 gap-2 md:grid md:grid-cols-2 md:gap-2 lg:grid lg:grid-cols-3 lg:gap-4'>
                         {blogs.map((blog: any) => {
                             const descriptionArray = blog.story.split(' ');
                             const shortDescriptionArray = descriptionArray.slice(0, 10);
@@ -60,7 +60,9 @@ const SearchPage = (props: Props) => {
                     </div>
                 ) : (
                     <div>
-                        <p className='font-semibold text-2xl'>No blogs found with title: {id}</p>
+                        <p className='font-semibold text-2xl'>
+                            No blogs found with title or author: {id}
+                        </p>
                     </div>
                 )}
             </div>

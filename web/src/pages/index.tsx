@@ -57,7 +57,7 @@ export default function Home() {
                 <form onSubmit={handleSubmit(onSubmit)} className='my-8 flex flex-row space-x-2'>
                     <input
                         type='text'
-                        placeholder='Type a blog title.'
+                        placeholder='Search Inkdrop'
                         className='input input-bordered w-full max-w-xs'
                         {...register('title', {required: true})}
                     />
@@ -66,7 +66,7 @@ export default function Home() {
 
                 <div className='mt-6'>
                     {blogs && blogs.length > 0 ? (
-                        <div className='grid grid-cols-1 md:grid-cols-3 md:gap-6'>
+                        <div className='grid grid-cols-1 gap-2 md:grid md:grid-cols-2 md:gap-2 lg:grid lg:grid-cols-3 lg:gap-4'>
                             {blogs.map((blog: any) => {
                                 const descriptionArray = blog.story.split(' ');
                                 const shortDescriptionArray = descriptionArray.slice(0, 10);

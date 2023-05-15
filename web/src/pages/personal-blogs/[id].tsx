@@ -32,7 +32,7 @@ const MyBlogs = (props: Props) => {
             <p className='text-3xl font-semibold py-4 text-black'>Your blogs</p>
             <div className='mt-6'>
                 {blogDetails && blogDetails.length > 0 ? (
-                    <div className='grid grid-cols-3 gap-6'>
+                    <div className='grid grid-cols-1 gap-2 md:grid md:grid-cols-2 md:gap-2 lg:grid lg:grid-cols-3 lg:gap-4'>
                         {blogDetails.map((blog: any) => {
                             const descriptionArray = blog.story.split(' ');
                             const shortDescriptionArray = descriptionArray.slice(0, 10);
