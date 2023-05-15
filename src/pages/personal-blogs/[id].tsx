@@ -53,7 +53,9 @@ const MyBlogs = (props: Props) => {
                     </div>
                 ) : (
                     <div>
-                        <p className='font-semibold text-2xl'>No blogs yet. Let's write one.</p>
+                        <p className='font-semibold text-2xl'>
+                            No blogs yet. Let&apos;s write one.
+                        </p>
                     </div>
                 )}
             </div>
