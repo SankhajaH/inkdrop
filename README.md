@@ -8,7 +8,7 @@ Inkdrop is a full-stack blogging platform built with Node.js and Next.js. It all
 
 - User authentication: Users can create an account, log in, and log out. Authentication is handled using NextAuth.js.
 - Create and edit blog posts: Users can create new blog posts, edit existing ones, and delete posts they created.
-- Browse and search posts: Users can view all blog posts created by other users, as well as search for posts by title.
+- Browse and search posts: Users can view all blog posts created by other users, as well as search for posts by title and author.
 - Responsive design: The platform is designed to work on desktop and mobile devices.
 
 ## Getting Started
@@ -32,10 +32,6 @@ To get started with Inkdrop, follow these steps:
 - MongoDB: NoSQL document database.
 - NextAuth.js: Authentication library for Next.js applications.
 - Axios: Promise-based HTTP client for Node.js and the browser.
-
-## Contributing
-
-Contributions to Inkdrop are welcome and appreciated! To contribute, please fork the repository, make changes, and submit a pull request.
 
 ## License
 
