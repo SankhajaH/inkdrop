@@ -12,11 +12,10 @@ const inter = Inter({subsets: ['latin']});
 
 export default function Home() {
     const url = process.env.BACKEND_API_URL;
-    console.log('🚀 ~ file: index.tsx:15 ~ Home ~ url:', url);
     const session = useSession();
     const [blogs, setBlogs] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
-    console.log('🚀 ~ file: signup.tsx:18 ~ Signup ~ session:', session);
+
     const {
         register,
         handleSubmit,
@@ -35,22 +34,14 @@ export default function Home() {
         axios
             .get(`https://inkdrop-sankhajah.onrender.com/blogs`)
             .then((res) => {
-                console.log('🚀 ~ file: index.tsx:17 ~ .then ~ res:', res.data);
                 setBlogs(res.data);
                 setLoading(false);
             })
             .catch((err) => {
-                console.log('🚀 ~ file: index.tsx:21 ~ useEffect ~ err:', err);
+                alert(err);
             });
     }, []);
-    if (loading)
-        return (
-            <Container className='flex-1'>
-                <div className='text-5xl flex justify-center'>
-                    <button className='btn loading'>Loading</button>
-                </div>
-            </Container>
-        );
+    if (loading) return <Container className='flex-1'></Container>;
     return (
         <>
             {!session.data && <Hero />}
@@ -67,33 +58,41 @@ export default function Home() {
                 </form>
 
                 <div className='mt-6'>
-                    {blogs && blogs.length > 0 ? (
-                        <div className='grid grid-cols-1 gap-2 md:grid md:grid-cols-2 md:gap-2 lg:grid lg:grid-cols-3 lg:gap-4'>
-                            {blogs.map((blog: any) => {
-                                const descriptionArray = blog.story.split(' ');
-                                const shortDescriptionArray = descriptionArray.slice(0, 10);
-                                const shortDescription = shortDescriptionArray.join(' ');
-                                return (
-                                    <div
-                                        key={blog._id}
-                                        onClick={() => router.push(`/blogs/${blog._id}`)}
-                                        className='cursor-pointer'
-                                    >
-                                        <BlogCard
-                                            title={blog.title}
-                                            description={shortDescription}
-                                            userId={blog.userId}
-                                            imageURL={blog.imageURL}
-                                        />
-                                    </div>
-                                );
-                            })}
+                    {loading ? (
+                        <div className='text-5xl flex justify-center'>
+                            <button className='btn loading'>Loading</button>
                         </div>
                     ) : (
                         <div>
-                            <p className='font-semibold text-2xl'>
-                                No blogs yet. Let&apos;s write one.
-                            </p>
+                            {blogs && blogs.length > 0 ? (
+                                <div className='grid grid-cols-1 gap-2 md:grid md:grid-cols-2 md:gap-2 lg:grid lg:grid-cols-3 lg:gap-4'>
+                                    {blogs.map((blog: any) => {
+                                        const descriptionArray = blog.story.split(' ');
+                                        const shortDescriptionArray = descriptionArray.slice(0, 10);
+                                        const shortDescription = shortDescriptionArray.join(' ');
+                                        return (
+                                            <div
+                                                key={blog._id}
+                                                onClick={() => router.push(`/blogs/${blog._id}`)}
+                                                className='cursor-pointer'
+                                            >
+                                                <BlogCard
+                                                    title={blog.title}
+                                                    description={shortDescription}
+                                                    userId={blog.userId}
+                                                    imageURL={blog.imageURL}
+                                                />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className='font-semibold text-2xl'>
+                                        No blogs yet. Let&apos;s write one.
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>

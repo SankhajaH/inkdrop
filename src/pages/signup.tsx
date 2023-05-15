@@ -15,7 +15,7 @@ type Props = {};
 const Signup = (props: Props) => {
     const router = useRouter();
     const session = useSession();
-    console.log('🚀 ~ file: signup.tsx:18 ~ Signup ~ session:', session);
+
     const {
         register,
         handleSubmit,
@@ -36,9 +36,8 @@ const Signup = (props: Props) => {
             })
             .catch((err) => {
                 alert(err.request.response);
-                console.log(err.request.response);
+                err.request.response;
             });
-        console.log('🚀 ~ file: signup.tsx:39 ~ registerUser ~ res:', res);
     };
 
     const loginUser = async (args: {email: string; password: string}) => {

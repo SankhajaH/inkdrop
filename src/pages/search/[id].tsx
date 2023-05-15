@@ -11,19 +11,17 @@ const SearchPage = (props: Props) => {
     const {id} = router.query;
     const [blogs, setBlogs] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
-    console.log('🚀 ~ file: [id].tsx:8 ~ SearchPage ~ id:', id);
 
     useEffect(() => {
         setLoading(true);
         axios
             .get(`https://inkdrop-sankhajah.onrender.com/blogs/search/${id}`)
             .then((res) => {
-                console.log('🚀 ~ file: index.tsx:17 ~ .then ~ res:', res.data);
                 setBlogs(res.data);
                 setLoading(false);
             })
             .catch((err) => {
-                console.log('🚀 ~ file: index.tsx:21 ~ useEffect ~ err:', err);
+                alert(err);
             });
     }, [id]);
     if (loading)

@@ -11,7 +11,6 @@ type Props = {};
 const CreateBlog = (props: Props) => {
     const url = process.env.BACKEND_API_URL;
     const session = useSession();
-    console.log('🚀 ~ file: create-blog.tsx:13 ~ CreateBlog ~ session:', session);
     const userId = session?.data?.user?.id;
     const router = useRouter();
     const {
@@ -23,7 +22,6 @@ const CreateBlog = (props: Props) => {
     } = useForm();
 
     const onSubmit = async (data: any) => {
-        console.log('🚀 ~ file: create-blog.tsx:24 ~ onSubmit ~ data:', data);
         const storage = getStorage(app);
         const imageRef = ref(storage, `images/${uuidv4()}`);
         const uploadTask = await uploadBytes(imageRef, data.image[0]);

@@ -13,7 +13,6 @@ const Blog = (props: Props) => {
     const session = useSession();
 
     const [profileName, setProfileName] = useState('');
-    console.log('🚀 ~ file: [id].tsx:11 ~ Blog ~ blogDetails:', blogDetails);
 
     useEffect(() => {
         axios
@@ -23,7 +22,7 @@ const Blog = (props: Props) => {
                 getProfileName(res.data.name);
             })
             .catch((err) => {
-                console.log('🚀 ~ file: [id].tsx:28 ~ axios.get ~ err:', err);
+                alert(err);
             });
     }, []);
 

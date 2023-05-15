@@ -30,7 +30,7 @@ const BlogCard = ({title, description, userId, imageURL}: Props) => {
             setProfileName(letter);
         }
     };
-    console.log('🚀 ~ file: blog-card.tsx:12 ~ BlogCard ~ userDetails:', userDetails);
+
     return (
         <div>
             {userDetails && (
