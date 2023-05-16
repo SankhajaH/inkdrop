@@ -40,7 +40,7 @@ const BlogCard = ({title, description, userId, imageURL}: Props) => {
                             <img src={imageURL} alt='cover_image' className='object-cover w-full' />
                         </figure>
                     ) : (
-                        <div className='card w-80 md:w-96 bg-base-100 shadow-xl'></div>
+                        <div className='card h-48 w-80 md:w-96 bg-base-100 shadow-xl'></div>
                     )}
 
                     <div className='card-body'>
