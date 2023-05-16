@@ -68,7 +68,7 @@ export default function Home() {
                                 <div className='grid grid-cols-1 gap-2 md:grid md:grid-cols-2 md:gap-2 lg:grid lg:grid-cols-3 lg:gap-4'>
                                     {blogs.map((blog: any) => {
                                         const descriptionArray = blog.story.split(' ');
-                                        const shortDescriptionArray = descriptionArray.slice(0, 10);
+                                        const shortDescriptionArray = descriptionArray.slice(0, 5);
                                         const shortDescription = shortDescriptionArray.join(' ');
                                         return (
                                             <div
