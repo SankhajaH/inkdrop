@@ -8,9 +8,11 @@ import {useForm} from 'react-hook-form';
 type Props = {};
 const PersonalSingleBlog = (props: Props) => {
     const session = useSession();
+    console.log('🚀 ~ file: [id].tsx:11 ~ PersonalSingleBlog ~ session:', session);
     const router = useRouter();
     const blogId = router.query.id;
     const url = process.env.BACKEND_API_URL;
+    const userId = session?.data?.user?.id;
 
     const [preloadedValues, setPreloadedValues] = useState({});
     useEffect(() => {
@@ -39,7 +41,7 @@ const PersonalSingleBlog = (props: Props) => {
                 alert('Blog updated successfully');
             });
         reset();
-        router.replace(`/personal-blogs/645f2fccff84e16fcef67c33`);
+        router.replace(`/personal-blogs/${userId}`);
     };
     if (session?.status === 'unauthenticated') {
         router.push('/signup');

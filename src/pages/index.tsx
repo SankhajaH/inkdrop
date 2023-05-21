@@ -13,6 +13,7 @@ const inter = Inter({subsets: ['latin']});
 export default function Home() {
     const url = process.env.BACKEND_API_URL;
     const session = useSession();
+    console.log('🚀 ~ file: index.tsx:16 ~ Home ~ session:', session);
     const [blogs, setBlogs] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
 
