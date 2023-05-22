@@ -39,13 +39,13 @@ const SearchPage = (props: Props) => {
                     <div className='grid grid-cols-1 gap-2 md:grid md:grid-cols-2 md:gap-2 lg:grid lg:grid-cols-3 lg:gap-4'>
                         {blogs.map((blog: any) => {
                             const descriptionArray = blog.story.split(' ');
-                            const shortDescriptionArray = descriptionArray.slice(0, 10);
+                            const shortDescriptionArray = descriptionArray.slice(0, 5);
                             const shortDescription = shortDescriptionArray.join(' ');
                             return (
                                 <div
                                     key={blog._id}
                                     onClick={() => router.push(`/blogs/${blog._id}`)}
-                                    className='cursor-pointer'
+                                    className='cursor-pointer '
                                 >
                                     <BlogCard
                                         title={blog.title}
