@@ -27,8 +27,8 @@ const SearchPage = (props: Props) => {
     if (loading)
         return (
             <Container className='flex-1'>
-                <div className='text-5xl items-center'>
-                    <button className='btn loading disabled:'>Loading</button>
+                <div className='flex justify-center mt-10'>
+                    <button className='btn btn-square loading'></button>
                 </div>
             </Container>
         );

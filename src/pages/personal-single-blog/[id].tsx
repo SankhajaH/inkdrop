@@ -15,10 +15,14 @@ const PersonalSingleBlog = (props: Props) => {
     const userId = session?.data?.user?.id;
 
     const [preloadedValues, setPreloadedValues] = useState({});
+    const [loading, setLoading] = useState<boolean>(false);
+    const [submitLoading, setSubmitLoading] = useState<boolean>(false);
     useEffect(() => {
+        setLoading(true);
         axios.get(`https://inkdrop-sankhajah.onrender.com/blogs/${blogId}`).then((res) => {
             setPreloadedValues({title: res.data.title, story: res.data.story});
         });
+        setLoading(false);
     }, []);
 
     const {
@@ -34,6 +38,7 @@ const PersonalSingleBlog = (props: Props) => {
     }, [preloadedValues]);
 
     const onSubmit = async (data: any) => {
+        setSubmitLoading(true);
         const blogDetails = {title: data.title, story: data.story};
         await axios
             .patch(`https://inkdrop-sankhajah.onrender.com/blogs/${blogId}`, blogDetails)
@@ -41,11 +46,21 @@ const PersonalSingleBlog = (props: Props) => {
                 alert('Blog updated successfully');
             });
         reset();
+        setSubmitLoading(false);
         router.replace(`/personal-blogs/${userId}`);
     };
     if (session?.status === 'unauthenticated') {
         router.push('/signup');
     }
+
+    if (loading)
+        return (
+            <Container className='flex-1'>
+                <div className='flex justify-center mt-10'>
+                    <button className='btn btn-square loading'></button>
+                </div>
+            </Container>
+        );
 
     return (
         <Container page>
@@ -76,7 +91,13 @@ const PersonalSingleBlog = (props: Props) => {
                             ></textarea>
 
                             <div className='flex justify-center md:flex md:justify-end w-full max-w-3xl'>
-                                <button className='btn btn-primary w-2/5'>Update</button>
+                                {submitLoading ? (
+                                    <button className='btn  w-2/5' disabled>
+                                        Publish
+                                    </button>
+                                ) : (
+                                    <button className='btn btn-primary w-2/5'>Update</button>
+                                )}
                             </div>
                         </div>
                     </div>

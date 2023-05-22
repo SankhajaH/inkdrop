@@ -15,6 +15,7 @@ type Props = {};
 const Signup = (props: Props) => {
     const router = useRouter();
     const session = useSession();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const {
         register,
@@ -50,12 +51,14 @@ const Signup = (props: Props) => {
     };
 
     const onSubmit = handleSubmit(async (data) => {
+        setLoading(true);
         if (authType === 'Register') {
             await registerUser(data);
         } else {
             await loginUser(data);
         }
         reset();
+        setLoading(false);
     });
 
     return (
@@ -144,7 +147,13 @@ const Signup = (props: Props) => {
                                 </div>
                             )}
                             <div className='py-4'>
-                                <button className='btn btn-primary'>{authType}</button>
+                                {loading ? (
+                                    <button className='btn btn-primary' disabled>
+                                        {authType}
+                                    </button>
+                                ) : (
+                                    <button className='btn btn-primary'>{authType}</button>
+                                )}
                             </div>
                         </div>
                     </div>

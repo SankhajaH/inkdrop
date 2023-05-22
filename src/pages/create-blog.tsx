@@ -5,6 +5,7 @@ import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
 import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/router';
 import 'quill/dist/quill.snow.css';
+import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {v4 as uuidv4} from 'uuid';
 type Props = {};
@@ -13,6 +14,7 @@ const CreateBlog = (props: Props) => {
     const session = useSession();
     const userId = session?.data?.user?.id;
     const router = useRouter();
+    const [loading, setLoading] = useState<boolean>(false);
     const {
         register,
         handleSubmit,
@@ -22,6 +24,7 @@ const CreateBlog = (props: Props) => {
     } = useForm();
 
     const onSubmit = async (data: any) => {
+        setLoading(true);
         const storage = getStorage(app);
         const imageRef = ref(storage, `images/${uuidv4()}`);
         const uploadTask = await uploadBytes(imageRef, data.image[0]);
@@ -54,6 +57,7 @@ const CreateBlog = (props: Props) => {
                 });
         }
         reset();
+        setLoading(false);
         router.push(`/personal-blogs/${userId}`);
     };
 
@@ -95,8 +99,13 @@ const CreateBlog = (props: Props) => {
                                 {...register('image')}
                                 accept='image/*'
                             />
-
-                            <button className='btn btn-primary md:w-2/5'>Publish</button>
+                            {loading ? (
+                                <button className='btn md:w-2/5' disabled>
+                                    Publish
+                                </button>
+                            ) : (
+                                <button className='btn btn-primary md:w-2/5'>Publish</button>
+                            )}
                         </div>
                     </div>
                 </div>

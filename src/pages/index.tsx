@@ -42,7 +42,14 @@ export default function Home() {
                 alert(err);
             });
     }, []);
-    if (loading) return <Container className='flex-1'></Container>;
+    if (loading)
+        return (
+            <Container className='flex-1'>
+                <div className='flex justify-center mt-10'>
+                    <button className='btn btn-square loading'></button>
+                </div>
+            </Container>
+        );
     return (
         <>
             {!session.data && <Hero />}
